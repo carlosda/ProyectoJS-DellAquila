@@ -1,0 +1,75 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    background-color: rgb(230, 215, 10);
+}
+
+.login form {
+    display: block;
+    align-items: center;
+    padding: 2%;
+    
+}
+
+.login form label, input, button {
+    display: block;
+}
+
+.login form input:not([type='submit']) {
+
+    border: none;
+    border-bottom: 2px solid #000000;
+    margin-bottom: 10px;
+    font-size: 20px;
+    outline: none;
+    color: gray;
+}
+
+.login form button {
+    padding: 10px;
+    background: black;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;    
+}
+
+.inputFile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5%;
+}
+
+.inputFile form {
+    display: block;
+    align-items: center;
+}
+
+.inputFile form label  {
+    padding: 10%;
+    font-size: 20px;
+    font-style: italic;
+}
+
+.inputFile form input {
+    margin: 10%;
+    padding: 10px;
+    background: black;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;  
+}
+
+.grafica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+

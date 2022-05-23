@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto JS</title>
+
+    <link rel="stylesheet" href="styles/styles.css">
+
+</head>
+
+<body>
+
+    <header></header>
+
+    <main>
+        <!-- En la sección de login se realizará la validación de usuario.
+             Una vez que el login sea correcto, esta sección se desabilitará.
+             Esto quiere decir que dejará de mostrarse. -->
+        <section class="login">
+
+            <img src="assets/rayo.svg" alt="Rayo Logo">
+            <form>
+
+                <label for="inputUsuario" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="inputUsuario">
+
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword">
+
+                <button type="submit">Login</button>
+            </form>
+
+        </section>
+
+        <!-- En esta sección el usuario ingresará el archivo con todas la mediciones
+             registradas por el medidor. -->
+        <section class="inputFile">
+            <form>
+                <label for="file">Seleccione un archivo: </label>
+                <input type="file" id="file" name="file">
+            </form>
+        </section>
+
+        <!-- Una vez seleccionado el archivo con mediciones, la página muestra un gráfico de las mismas.
+             Se ha colocado una imágen representativa. -->
+        <section class="grafica">
+            <!-- TODO -->
+            <img src="assets/valores.svg" alt="Mediciones de Ejemplo!">
+        </section>
+
+    </main>
+
+    <footer></footer>
+    <script src="js/index.js"></script>    
+</body>
+
+</html>
