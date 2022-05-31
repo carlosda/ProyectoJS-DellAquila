@@ -74,37 +74,37 @@ class Medicion {
 const medPrevias = [
     {
         time:"10:00:00, 25/05/2022",
-        value:"220",
+        value:220,
         unit:"v",        
     },
     {
         time:"11:00:00, 25/05/2022",
-        value:"218",
+        value:218,
         unit:"v",        
     },
     {
         time:"12:00:00, 25/05/2022",
-        value:"230",
+        value:230,
         unit:"v",        
     },
     {
         time:"13:00:00, 25/05/2022",
-        value:"240",
+        value:240,
         unit:"v",        
     },
     {
         time:"14:00:00, 25/05/2022",
-        value:"216",
+        value:216,
         unit:"v",        
     },
     {
         time:"15:00:00, 25/05/2022",
-        value:"210",
+        value:210,
         unit:"v",        
     },
     {
         time:"16:00:00, 25/05/2022",
-        value:"220",
+        value:220,
         unit:"v",        
     }
 ];
@@ -121,7 +121,7 @@ do {
     // Ingreso del instante de tiempo de la medición.
     let time = prompt("Ingrese tiempo de la medicion (ESC para salir):");
 
-    if ((hora == "ESC") || (hora == "Esc") || (hora == "esc")) {
+    if ((time == "ESC") || (time == "Esc") || (time == "esc")) {
         condContinuar = false;
         console.log("Se finalizó la carga de valores");
 
@@ -161,7 +161,7 @@ class EstMediciones {
         for(const med of this.mediciones) {
             acumula = acumula + med.getValue();
         }
-        return acumula / this.mediciones.length();
+        return (acumula/this.mediciones.length);
     }
 
     getMaximo() {
@@ -181,16 +181,17 @@ class EstMediciones {
 
         for(const med of this.mediciones) {
             if (primeraMed == false) {
-                primeraMed = false;
+                primeraMed = true;
                 min = med;
             } else {
                 if(med.getValue() < min.getValue()) { min = med; }
             }
         }
 
+        return min;
+
     }
 }
-
 
 
 let est = new EstMediciones(mediciones);
@@ -201,8 +202,8 @@ console.log("===================================================================
 console.log("                               RESUMEN DE MEDICIONES                                 ");
 console.log("=====================================================================================");
 console.log("El promedio de los valores es "+ est.getPromedio() +" voltios.");
-console.log("La medición de MAYOR valor fue: "+ est.getMaximo().getValue()+"voltios y ocurrió a las "+ est.getMaximo().getTime());
-console.log("La medición de MENOR valor fue: "+ est.getMinimo().getValue() +"voltios y ocurrió a las "+est.getMinimo().getTime());
+console.log("La medición de MAYOR valor fue: "+ est.getMaximo().getValue()+" voltios y ocurrió a las "+ est.getMaximo().getTime());
+console.log("La medición de MENOR valor fue: "+ est.getMinimo().getValue() +" voltios y ocurrió a las "+est.getMinimo().getTime());
 
 let rango = est.getMaximo().getValue() - est.getMinimo().getValue();
 console.log("La diferencia de tensión entre el valor máximo y mínimo fue de: "+ rango +"voltios");
