@@ -201,12 +201,21 @@ let est = new EstMediciones(mediciones);
 console.log("=====================================================================================");
 console.log("                               RESUMEN DE MEDICIONES                                 ");
 console.log("=====================================================================================");
-console.log("El promedio de los valores es "+ est.getPromedio() +" voltios.");
-console.log("La medición de MAYOR valor fue: "+ est.getMaximo().getValue()+" voltios y ocurrió a las "+ est.getMaximo().getTime());
+console.log("El promedio de los valores es " + est.getPromedio() +" voltios.");
+console.log("La medición de MAYOR valor fue: " + est.getMaximo().getValue() +" voltios y ocurrió a las "+ est.getMaximo().getTime());
 console.log("La medición de MENOR valor fue: "+ est.getMinimo().getValue() +" voltios y ocurrió a las "+est.getMinimo().getTime());
 
 let rango = est.getMaximo().getValue() - est.getMinimo().getValue();
 console.log("La diferencia de tensión entre el valor máximo y mínimo fue de: "+ rango +"voltios");
+
+
+/* Se muestran por consola los valores de tensión que se encuentran por debajo de 220v */
+let menores220 = mediciones.filter((el) => el.getValue() < 220 );
+
+console.log("Los Valores por debajo de 220v son: ");
+console.log("Instante       Valor de Tensión    Unidad");
+console.log("=========================================");
+menores220.forEach((el) => console.log(el.getTime()+"     "+el.getValue()+"      "+el.getUnit()) );
 
 
 
