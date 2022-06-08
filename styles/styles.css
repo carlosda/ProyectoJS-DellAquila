@@ -10,10 +10,12 @@
     display: block;
     align-items: center;
     padding: 2%;
-    
+
 }
 
-.login form label, input, button {
+.login form label,
+input,
+button {
     display: block;
 }
 
@@ -33,7 +35,7 @@
     border-radius: 10px;
     color: white;
     font-size: 20px;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 .inputFile {
@@ -48,7 +50,7 @@
     align-items: center;
 }
 
-.inputFile form label  {
+.inputFile form label {
     padding: 10%;
     font-size: 20px;
     font-style: italic;
@@ -61,7 +63,7 @@
     border-radius: 10px;
     color: white;
     font-size: 20px;
-    cursor: pointer;  
+    cursor: pointer;
 }
 
 .grafica {
@@ -70,6 +72,22 @@
     align-items: center;
 }
 
+/* Estilos de la tabla */
 
+.tablaHeader td {
+    text-align: center;
+    color: beige;
+    font-weight: bold;
+    font-size: xx-large;
+    background-color: black;
+    padding: 10px;
+}
 
+.filasValores td {
+    text-align: center;
+    font-family: 'Hubballi';
+    font-style: italic;
+    font-size: x-large;
+    padding: 10px;    
+}
 

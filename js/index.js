@@ -47,6 +47,10 @@ do {
 
 } while (!login);
 
+/* Oculta la sección de login una vez que el mismo fue exitoso */
+let loginSec = document.getElementById("login");
+loginSec.style.display = "none";
+
 /*
  * Clase Medición
  */
@@ -217,13 +221,34 @@ console.log("Instante       Valor de Tensión    Unidad");
 console.log("=========================================");
 menores220.forEach((el) => console.log(el.getTime()+"     "+el.getValue()+"      "+el.getUnit()) );
 
+/* Vinculación con html */
 
 
+/* Genero la tabla */
+let tabla=document.createElement("table");
+tabla.className="tabla";
 
+// Genero el encabezado de la table.
+let tablaTr=document.createElement("tr");
+tablaTr.className="tablaHeader";
+tablaTr.innerHTML=`
+    <td>Instante</td>
+    <td>Valor Tensión</td>
+    <td>Unidad</td>`;
+tabla.append(tablaTr);
 
+// Genero los valores de la tabla.
+for (const med of mediciones) {
+    let filaMed=document.createElement("tr");
+    filaMed.className = "filasValores";
+    filaMed.innerHTML=`
+    <td>${med.getTime()}</td>
+    <td>${med.getValue()}</td>
+    <td>${med.getUnit()}</td>`;
+    
+    tabla.append(filaMed);
+}
 
-
-
-
-
-
+//Agrego la tabla al elemento que me interesa.
+let divTabla = document.getElementById("tablaValores");
+divTabla.append(tabla);
