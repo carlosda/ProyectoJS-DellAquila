@@ -40,7 +40,7 @@ class Usuario {
 class Medicion {
     constructor(objLiteral) {
         this.time = objLiteral.time;   // Formato hh:mm:ss,dd/MM/YYYY.
-        this.value = objLiteral.value;  // Valor numerico.
+        this.value = parseFloat(objLiteral.value);  // Valor numerico.
         this.unit = objLiteral.unit;   // Unidad de medida (v, mV, uv, etc.)
     }
 
@@ -96,11 +96,14 @@ const medPrevias = [
     }
 ];
 
+/* Lee las mediciones almacenadas, si no están carga una por defecto. */
+const medAlmacenadas = JSON.parse(localStorage.getItem("mediciones")) || medPrevias;
+
 /* Arrays para almacenar los valores previos y los que serán leídos por promt. */
 const mediciones = [];
 
 /* Cargo el arreglo previo */
-for (const med of medPrevias) {
+for (const med of medAlmacenadas) {
     mediciones.push(new Medicion(med));
 }
 
@@ -177,71 +180,37 @@ function cargaEvt(e) {
     let med = new Medicion({ time: time, value: tension, unit: unit });
     // Agrego el objeto al array de mediciones.
     mediciones.push(med);
+    //  Almaceno mediciones.
+    localStorage.setItem("mediciones",JSON.stringify(mediciones))
+    // Actualiza tabla
     actualizaTabla();
 }
 
-
-/*
-
-do {
-    // Ingreso del instante de tiempo de la medición.
-    let time = prompt("Ingrese tiempo de la medicion (ESC para salir):");
-
-    if ((time == "ESC") || (time == "Esc") || (time == "esc")) {
-        condContinuar = false;
-        console.log("Se finalizó la carga de valores");
-
-    } else {
-
-        // Ingreso valor de tensión.
-        let tension = parseFloat(prompt("Ingrese valor tensión"));
-        // Ingreso unidad de medida.
-        let unit = prompt("Ingrese unidad de medida");
-        // Creo un objeto de la clase medición. 
-        let med = new Medicion({ time: time, value: tension, unit: unit });
-        // Agrego el objeto al array de mediciones.
-        mediciones.push(med);
-        condContinuar = true;
-    }
-
-} while (condContinuar);
-
-*/
-
-/*
-console.log("Instante       Valor de Tensión    Unidad");
-console.log("=========================================");
-
-
-
-for (const med of mediciones) {
-    console.log(med.getTime() + "     " + med.getValue() + "      " + med.getUnit());
-}
-
-*/
 
 class EstMediciones {
     constructor(objMediciones) {
         this.mediciones = objMediciones;
     }
 
-    getPromedio() {
+    getPromedio() {        
 
         let acumula = 0;
 
         for (const med of this.mediciones) {
-            acumula = acumula + med.getValue();
+            let {value}= med;
+            acumula = acumula + value;
         }
         return (acumula / this.mediciones.length);
     }
 
     getMaximo() {
 
-        let max = new Medicion({ time: "", value: 0, unit: "" });
+        let values = this.mediciones.map((el) => el.value);
+        
+        // obtengo el valor máximo.
+        let max_value = Math.max(...values);
 
-        for (const med of this.mediciones) {
-            if (max.getValue() < med.getValue()) { max = med; }
-        }
+        let max = mediciones.find((el) => el.value == max_value);
 
         return max;
     }
@@ -251,22 +220,21 @@ class EstMediciones {
         let min = new Medicion({ time: "", value: 0, unit: "" });
 
         for (const med of this.mediciones) {
+            
             if (primeraMed == false) {
                 primeraMed = true;
                 min = med;
             } else {
-                if (med.getValue() < min.getValue()) { min = med; }
+                (med.getValue() < min.getValue()) ? min = med : null;                
             }
         }
 
         return min;
-
     }
 }
 
 
 let est = new EstMediciones(mediciones);
-
 
 
 /* Muestro por consola el resumen de los resultados */
@@ -316,9 +284,5 @@ function actualizaTabla() {
     <td>${med.getUnit()}</td>`;
 
         tabla.append(filaMed);
-    }
-
-    //Agrego la tabla al elemento que me interesa.
-    let divTabla = document.getElementById("tablaValores");
-    divTabla.append(tabla);
+    }  
 }
