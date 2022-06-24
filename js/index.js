@@ -158,8 +158,8 @@ function loginEvt(e) {
 
     console.log("Login Exitoso");
 
-    
-    
+
+
 }
 
 /* Control de formulario para ingreso manual de los datos */
@@ -181,9 +181,17 @@ function cargaEvt(e) {
     // Agrego el objeto al array de mediciones.
     mediciones.push(med);
     //  Almaceno mediciones.
-    localStorage.setItem("mediciones",JSON.stringify(mediciones))
+    localStorage.setItem("mediciones", JSON.stringify(mediciones))
     // Actualiza tabla
     actualizaTabla();
+
+    Swal.fire({
+        title:'Nueva mediciòn cargada',
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton:false       
+    }); 
+
 }
 
 
@@ -192,12 +200,12 @@ class EstMediciones {
         this.mediciones = objMediciones;
     }
 
-    getPromedio() {        
+    getPromedio() {
 
         let acumula = 0;
 
         for (const med of this.mediciones) {
-            let {value}= med;
+            let { value } = med;
             acumula = acumula + value;
         }
         return (acumula / this.mediciones.length);
@@ -206,7 +214,7 @@ class EstMediciones {
     getMaximo() {
 
         let values = this.mediciones.map((el) => el.value);
-        
+
         // obtengo el valor máximo.
         let max_value = Math.max(...values);
 
@@ -220,12 +228,12 @@ class EstMediciones {
         let min = new Medicion({ time: "", value: 0, unit: "" });
 
         for (const med of this.mediciones) {
-            
+
             if (primeraMed == false) {
                 primeraMed = true;
                 min = med;
             } else {
-                (med.getValue() < min.getValue()) ? min = med : null;                
+                (med.getValue() < min.getValue()) ? min = med : null;
             }
         }
 
@@ -264,7 +272,7 @@ function actualizaTabla() {
     /* Genero la tabla */
     let tabla = document.getElementById("tablaValores");
     tabla.innerHTML = ``;
-    
+
     // Genero el encabezado de la table.
     let tablaTr = document.createElement("tr");
     tablaTr.className = "tablaHeader";
@@ -284,5 +292,5 @@ function actualizaTabla() {
     <td>${med.getUnit()}</td>`;
 
         tabla.append(filaMed);
-    }  
+    }
 }
