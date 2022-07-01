@@ -94,7 +94,8 @@ const medPrevias = [
         value: 220,
         unit: "v",
     }
-];
+]; 
+
 
 /* Lee las mediciones almacenadas, si no están carga una por defecto. */
 const medAlmacenadas = JSON.parse(localStorage.getItem("mediciones")) || medPrevias;
@@ -294,3 +295,16 @@ function actualizaTabla() {
         tabla.append(filaMed);
     }
 }
+
+// AJAX y API
+
+const pedirPrecioTarifa = async () => {
+    const resp = await fetch('https://api.preciodelaluz.org/v1/prices/max?zone=PCB')
+    const data = await resp.json()
+
+   console.log("El precio de la tarifa es:"+data.price+" "+data.units);  
+   
+    
+}
+
+pedirPrecioTarifa();
